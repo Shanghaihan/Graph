@@ -43,7 +43,7 @@ def parameter_parser():
 
     parser.add_argument("--wl-iterations",
                         type=int,
-                        default=2,
+                        default=10,
 	                help="Number of Weisfeiler-Lehman iterations. Default is 2.")
 
     parser.add_argument("--learning-rate",

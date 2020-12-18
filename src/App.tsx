@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, {useEffect, useMemo, useReducer, useState } from 'react';
 import './App.css';
-import  { NetWork, Scatter} from './component/Graph';
+import  { NetWork, Parallel, Scatter} from './component/Graph';
 
 function reducer(state:any,action:any) {
     switch (action.type) {
         case 'changeState':
-            return action.currentGraph
+            return  {currentGraph:action.currentGraph,...state}
+        case 'changeColor':
+            return {color:action.color,...state}
         default:
             return state;
     }
@@ -47,6 +49,7 @@ function App() {
             }}>
                 <Scatter/>
                 <NetWork/>
+                <Parallel/>
             </context.Provider>     
         </div>
     );

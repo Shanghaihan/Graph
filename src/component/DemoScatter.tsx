@@ -8,11 +8,20 @@ const DemoScatter: React.FC = () => {
     //@ts-ignore
     const {currentGraph,dispatch,data} = useContext(context)
     useEffect(() => {
+        if(ref.current){   
+            dispatch({
+                type:'changeColor',
+                //@ts-ignore
+                color:ref.current.chart.geometries[0].dataArray.flat()
+            })
+        }
+    }, [])
+
+    useEffect(() => {
         if (ref.current) {
             // 点击 point
             //@ts-ignore
             ref.current.on('element:click', (e) => {
-                console.log(e.data); 
                 dispatch({
                     type:'changeState',
                     currentGraph:e.data.data

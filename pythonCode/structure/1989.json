@@ -1,0 +1,1 @@
+{"edges": [[0, 1]], "features": {"0": "0", "1": "1"}, "count": 1, "cite": 50, "position": 2.0, "connect": 1.0, "totalConnect": 2.0, "totalCount": 0.5, "totalCite": 50.0, "totalPosition": 2.0, "name": "Overmars,Mark", "nodes": [{"id": "0"}, {"id": "1"}], "edgess": [{"source": "0", "target": "1"}], "year": 2012, "authorId": {"0": "Overmars,Mark", "1": "Karamouzas,Ioannis"}}

@@ -1,0 +1,1 @@
+{"edges": [[0, 1]], "features": {"0": "0", "1": "1"}, "count": 1, "cite": 12, "position": 2.0, "connect": 1.0, "totalConnect": 2.0, "totalCount": 0.5, "totalCite": 12.0, "totalPosition": 2.0, "name": "Signoroni,Alberto", "nodes": [{"id": "0"}, {"id": "1"}], "edgess": [{"source": "0", "target": "1"}], "year": 2018, "authorId": {"0": "Signoroni,Alberto", "1": "Centin,Marco"}}

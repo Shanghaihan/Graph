@@ -115,15 +115,13 @@ def preMain(stratYear,endYear):
             for t  in temp_edges:
                 if (t[0]==j[0] and t[1]==j[1]) or (t[0]==j[1] and t[1]==j[0]):
                     flag = 0
-            if flag ==1:
+            if flag == 1:
                 temp_edges.append(j)
-                edgess.append(  {'source':str(j[0]),'target':str(j[1])})
+                edgess.append({'source':str(j[0]),'target':str(j[1])})
         totalConnect = len(final[i]['graph'])/(len(temp_edges))           #团队的合作紧密度
         temp = {"edges": temp_edges,"features": tt,'count':final[i]['count'],'cite':final[i]['cite'],'position':final[i]['position'],'connect':final[i]['connect'],
                 'totalConnect':totalConnect,'totalCount':final[i]['totalCount'],'totalCite':final[i]['totalCite'],'totalPosition':final[i]['totalPosition'],
-                'paper':final[i]['paper'],
-                'name':final[i]['name'],'nodes':nodes,'edgess':edgess,'year':final[i]['year'],
-                'authorId':final[i]['authorId']}
+                'name':final[i]['name'],'nodes':nodes,'edgess':edgess,'year':final[i]['year'],'authorId':final[i]['authorId']}
         Alltemp.append(temp)
         with open('./structure/' + str(i) + '.json', "w") as f:
             json.dump(temp, f, cls=MyEncoder)
@@ -131,7 +129,7 @@ def preMain(stratYear,endYear):
         json.dump(Alltemp, f, cls=MyEncoder)
     print("preData finished")
 if __name__ == "__main__":
-    preMain(2019,2019)      #对于原数据，一般只需要修改年限
+    preMain(2010,2019)      #对于原数据，一般只需要修改年限
     args = parameter_parser()
     main(args)
 

@@ -11,8 +11,10 @@ import numpy.distutils.system_info as sysinfo
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import json
 from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
 import  numpy as np
 from sklearn.cluster import DBSCAN
+from sklearn.cluster import KMeans
 import itertools
 
 # logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
@@ -150,19 +152,20 @@ def main(args):
     print("graph2vec Training finished")
     graphVec = model.docvecs.vectors_docs.tolist()
     #tsne降维
-    X_tsne = TSNE(n_components=2,learning_rate=200).fit_transform(graphVec)
+    X_tsne = TSNE(n_components=2).fit_transform(graphVec)
     print("Tsne Training finished")
     X_DBscan = modiData(X_tsne)
     #Dbscan聚类
-    DBscanData = DBSCAN(eps=5, min_samples=5, metric='euclidean').fit(X_DBscan)
+    DBscanData = KMeans(n_clusters=8).fit(X_DBscan)
+    # DBscanData = DBSCAN(eps=5, min_samples=5, metric='euclidean').fit(X_DBscan)
     print("DBscan Training finished")
-
     label = DBscanData.labels_.tolist()
     final = []
     for i in range(0, len(AllGraph)):
-        temp = {'id': i, 'x': X_DBscan[i][0], 'y': X_DBscan[i][1], 'cluster': label[i],
-                'name':AllGraph[i]['name'],'paper':AllGraph[i]['paper'],'count':AllGraph[i]['count'],
-                'cite':AllGraph[i]['cite'],'position':AllGraph[i]['position'],'edges':AllGraph[i]['edges'],
+        temp = {'id': i, 'x': X_DBscan[i][0], 'y': X_DBscan[i][1], 'cluster': label[i],'name':AllGraph[i]['name'],
+                'count':AllGraph[i]['count'],'cite':AllGraph[i]['cite'],'position':AllGraph[i]['position'],'connect':AllGraph[i]['connect'],
+                'totalConnect':AllGraph[i]['totalConnect'],'totalCount':AllGraph[i]['totalCount'],'totalCite':AllGraph[i]['totalCite'],'totalPosition':AllGraph[i]['totalPosition'],
+                'edges':AllGraph[i]['edges'],
                 'nodes':AllGraph[i]['nodes'],'edgess':AllGraph[i]['edgess']}
         final.append(temp)
     with open('../public/struc.json', "w") as f:

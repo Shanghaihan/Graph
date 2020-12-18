@@ -1,0 +1,1 @@
+{"edges": [[0, 1]], "features": {"0": "0", "1": "1"}, "count": 1, "cite": 9, "position": 2.0, "connect": 1.0, "totalConnect": 2.0, "totalCount": 0.5, "totalCite": 9.0, "totalPosition": 2.0, "name": "Beck,Fabian", "nodes": [{"id": "0"}, {"id": "1"}], "edgess": [{"source": "0", "target": "1"}], "year": 2019, "authorId": {"0": "Beck,Fabian", "1": "Latif,Shahid"}}

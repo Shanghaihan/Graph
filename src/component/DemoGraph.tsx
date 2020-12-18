@@ -7,11 +7,12 @@ const DemoGraph:React.FC = ()=>{
     const ref = React.useRef<HTMLDivElement>(null);
     //@ts-ignore
     const {currentGraph} = useContext(context);
+    console.log(currentGraph)
     const data = {
         // 点集
-        nodes: currentGraph==null?[]:currentGraph.nodes,
+        nodes: currentGraph.currentGraph==null?[]:currentGraph.currentGraph.nodes,
         // 边集
-        edges: currentGraph==null?[]:currentGraph.edgess,
+        edges: currentGraph.currentGraph==null?[]:currentGraph.currentGraph.edgess,
     };
     //@ts-ignore 
     var graph:any = null;
