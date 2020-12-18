@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+import React, {useEffect, useMemo, useReducer, useState } from 'react';
 import './App.css';
+import  { NetWork, Scatter} from './component/Graph';
+
+function reducer(state:any,action:any) {
+    switch (action.type) {
+        case 'changeState':
+            return action.currentGraph
+        default:
+            return state;
+    }
+}
+const useData =(action:any)=>{
+    const [data,setData] = useState([]);
+    const [pending,setPending] = useState(true);
+    useEffect(() => {
+        const getData = async()=>{
+            setPending(true);
+            const res = await (await axios.get('../struc.json')).data;
+            setPending(false);
+            res.forEach((ele:any)=>{
+                ele.cluster = "type"+ele.cluster  ;
+            });
+            setData(res); 
+            action({
+                type:'changeState',
+                currentGraph:res[10]
+            }) 
+        }
+        getData();
+        return () => {
+        }
+    },[]) 
+    return {data,pending};
+}
+export const context = React.createContext({});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Reactt
-        </a>
-      </header>
-    </div>
-  );
+    const [currentGraph,dispatch] = useReducer<any>(reducer,{})
+    const {data,pending} = useData(dispatch);
+    return (
+        <div className="App">
+            <context.Provider value={{ 
+                data,
+                currentGraph,dispatch,
+            }}>
+                <Scatter/>
+                <NetWork/>
+            </context.Provider>     
+        </div>
+    );
 }
 
 export default App;
